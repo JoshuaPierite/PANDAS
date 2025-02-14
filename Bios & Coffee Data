@@ -27,6 +27,16 @@ coffee.drop(columns=['price'], inplace=True)
 Answer:
 coffee['revenue']= coffee['Units Sold']* coffee['new_price']
 
-Create a category height column where athletes are labeled as Short if they are less than 165cm , Average if they are less than 185cm and and anyhting above that listed as Tall.
+8.Create a category height column where athletes are labeled as Short if they are less than 165cm , Average if they are less than 185cm and and anyhting above that listed as Tall.
 Answer:
 bios['height_category']= bios['height_cm'].apply(lambda x: 'Short' if x<165 else('Average' if x < 185 else 'Tall'))
+
+9. Merge the bios data with nocs data by where the athletes were born to the NOC in the nocs table.
+Answer:
+bios_new=pd.merge(bios, nocs, left_on='born_country', right_on='NOC', how='left')
+
+10. In the coffee data create a table showing the sum of coffee sold grouped by coffee type.
+Answer:
+coffee.groupby(['Coffee Type'])['Units Sold'].sum()
+
+
