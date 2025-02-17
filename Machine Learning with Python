@@ -1,0 +1,33 @@
+1. Load data and create you input and output tables.
+Answer:
+import pandas as pd
+music= pd.read_csv('https://raw.githubusercontent.com/mosh-hamedani/python-supplementary-materials/refs/heads/main/music.csv')
+X = music.drop(columns=['genre'])
+y = music['genre']
+
+2. Create an algorithum that gives the predicted genre a 21 year old male and a 22 year old female would possible be into based on the data.
+Answer:
+model = DecisionTreeClassifier()
+model.fit(X, y)
+predictions= model.predict([ [21, 1], [22, 0] ])
+predictions
+-Output: array(['HipHop', 'Dance'], dtype=object)
+
+3. Calculate the accuracy of the model based on the data provided with traing at 80%.
+Answer:
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+music= pd.read_csv('https://raw.githubusercontent.com/mosh-hamedani/python-supplementary-materials/refs/heads/main/music.csv')
+X = music.drop(columns=['genre'])
+y = music['genre']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+predictions= model.predict(X_test)
+
+score = accuracy_score(y_test, predictions)
+score
